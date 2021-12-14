@@ -1,13 +1,14 @@
-const num = Array.from(document.getElementsByClassName('num'))
 const display = document.getElementById('d')
+const num = Array.from(document.getElementsByClassName('num'))
 const operations = Array.from(document.getElementsByClassName('operation'))
 const equals = document.getElementById('equal')
 const sign = document.getElementById('sign')
+const clear = document.getElementById('clear')
+
 let opType = ''
 let n1 = NaN
 let n2 = NaN
 let operatorSelected = false
-let temp = ''
 
 
 num.forEach(num => num.addEventListener('click', numSelect))
@@ -17,6 +18,43 @@ operations.forEach(operations => operations.addEventListener('click', opSelect))
 equals.addEventListener('click', operate)
 
 sign.addEventListener('click', changeSign)
+
+clear.addEventListener('click', reset)
+
+
+function numSelect (e) {
+    if (operatorSelected == false){
+      display.textContent = display.textContent +  e.target.innerHTML
+      display.value = parseFloat(display.textContent)
+      n1 = display.value
+      console.log("n1: "+n1)
+    }
+
+    else if (display.value == undefined){
+      console.log(e.target.innerHTML)
+      display.textContent = e.target.innerHTML
+      display.value = parseFloat(display.textContent)
+      n2 = display.value
+      console.log("n2: "+n2)
+    
+    }
+    else {
+      console.log("display value" + display.value)
+      display.textContent = display.textContent +  e.target.innerHTML
+      display.value = parseFloat(display.textContent)
+      n2 = display.value
+      console.log("n2: "+n2)
+    }
+  }
+
+function opSelect(e){
+  operatorSelected = true
+  console.log(e.target.id)
+  display.value = undefined
+  console.log(display.value)
+  opType = e.target.id
+ 
+}
 
 function operate() {
   console.log(opType)
@@ -54,36 +92,24 @@ function updateResult(result) {
   display.textContent = result
 }
 
-function opSelect(e){
-  operatorSelected = true
-  console.log(e.target.id)
+function reset(){
+  n1 = NaN
+  n2 = NaN
+  operatorSelected = false
   display.value = undefined
-  console.log(display.value)
-  opType = e.target.id
- 
+  display.textContent = ''
 }
 
-function numSelect (e) {
-    if (operatorSelected == false){
-      display.textContent = display.textContent +  e.target.innerHTML
-      display.value = parseFloat(display.textContent)
-      n1 = display.value
-      console.log("n1: "+n1)
-    }
 
-    else if (display.value == undefined){
-      console.log(e.target.innerHTML)
-      display.textContent = e.target.innerHTML
-      display.value = parseFloat(display.textContent)
-      n2 = display.value
-      console.log("n2: "+n2)
-    
-    }
-    else {
-      console.log("display value" + display.value)
-      display.textContent = display.textContent +  e.target.innerHTML
-      display.value = parseFloat(display.textContent)
-      n2 = display.value
-      console.log("n2: "+n2)
-    }
-  }
+
+
+/* TODO: 
+finish decimal button implementation
+finish adding implicit equals to operation signs
+add another display to store previous value
+add limit on no of decimal places and digits
+add message for dividing by 0
+add back button
+add kb support
+make it look better
+*/
