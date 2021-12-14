@@ -36,34 +36,36 @@ backspace.addEventListener('click', bSpace)
 window.addEventListener('keydown', numSelectKB)
 
 
-function bSpace(e){
-  if (operatorSelected == false){
-    display.textContent = display.textContent.substring(0, display.textContent.length-1)
-    display.value = parseFloat(display.textContent)
-    n1 = display.value
-    console.log(display.textContent.length)
-    console.log("n1: "+n1)
-  }
+function numSelect(e) {
+  console.log(e)
+  console.log(e.target.innerHTML)
+  console.log("id "+e.target.id)
+    if (display.textContent.length>11){
 
-  else if (display.value == undefined){
-    display.textContent = display.textContent.substring(0, display.textContent.length-1)
-    display.value = parseFloat(display.textContent)
-    n2 = display.value
-    console.log("n2: "+n2)
-  
-  }
-  else {
-    console.log("display value" + display.value)
-    display.textContent = display.textContent.substring(0, display.textContent.length-1)
-    display.value = parseFloat(display.textContent)
-    n2 = display.value
-    console.log("n2: "+n2)
-  }
-  
-}
+    }
+    else if (operatorSelected == false){
+      display.textContent = display.textContent +  e.target.innerHTML
+      display.value = parseFloat(display.textContent)
+      n1 = display.value
+      console.log(display.textContent.length)
+      console.log("n1: "+n1)
+    }
 
-function equalsKB(e){
-  console.log(e.keyCode)
+    else if (display.value == undefined){
+      console.log(e.target.innerHTML)
+      display.textContent = e.target.innerHTML
+      display.value = parseFloat(display.textContent)
+      n2 = display.value
+      console.log("n2: "+n2)
+    
+    }
+    else {
+      console.log("display value" + display.value)
+      display.textContent = display.textContent +  e.target.innerHTML
+      display.value = parseFloat(display.textContent)
+      n2 = display.value
+      console.log("n2: "+n2)
+    }
 }
 
 function numSelectKB(e){
@@ -99,39 +101,6 @@ function numSelectKB(e){
     else {
       console.log("display value" + display.value)
       display.textContent = display.textContent +  e.key
-      display.value = parseFloat(display.textContent)
-      n2 = display.value
-      console.log("n2: "+n2)
-    }
-}
-
-
-function numSelect(e) {
-  console.log(e)
-  console.log(e.target.innerHTML)
-  console.log("id "+e.target.id)
-    if (display.textContent.length>11){
-
-    }
-    else if (operatorSelected == false){
-      display.textContent = display.textContent +  e.target.innerHTML
-      display.value = parseFloat(display.textContent)
-      n1 = display.value
-      console.log(display.textContent.length)
-      console.log("n1: "+n1)
-    }
-
-    else if (display.value == undefined){
-      console.log(e.target.innerHTML)
-      display.textContent = e.target.innerHTML
-      display.value = parseFloat(display.textContent)
-      n2 = display.value
-      console.log("n2: "+n2)
-    
-    }
-    else {
-      console.log("display value" + display.value)
-      display.textContent = display.textContent +  e.target.innerHTML
       display.value = parseFloat(display.textContent)
       n2 = display.value
       console.log("n2: "+n2)
@@ -201,31 +170,6 @@ function reset(){
   display.textContent = ''
 }
 
-function decimalSelectKB(e){
-  console.log('dbkb run')
-  if (operatorSelected == false && !(display.textContent.includes('.'))){
-    display.textContent = display.textContent +  e.key
-    display.value = parseFloat(display.textContent)
-    n1 = display.value
-    console.log("n1: "+n1)
-  }
-
-  else if (display.value == undefined){
-    console.log(e.target.innerHTML)
-    display.textContent = e.key
-    display.value = parseFloat(display.textContent)
-    n2 = display.value
-    console.log("n2: "+n2)
-  
-  }
-  else if (display.value &&  !(display.textContent.includes('.'))) {
-    display.textContent = display.textContent +  e.key
-    display.value = parseFloat(display.textContent)
-    n2 = display.value
-    console.log("n2: "+n2)
-  }
-}
-
 function decimalSelect(e){
   if (operatorSelected == false && !(display.textContent.includes('.'))){
     display.textContent = display.textContent +  e.key
@@ -251,7 +195,64 @@ function decimalSelect(e){
 
 }
 
+function decimalSelectKB(e){
+  console.log('dbkb run')
+  if (operatorSelected == false && !(display.textContent.includes('.'))){
+    display.textContent = display.textContent +  e.key
+    display.value = parseFloat(display.textContent)
+    n1 = display.value
+    console.log("n1: "+n1)
+  }
 
-/* TODO: 
-add back button
-*/
+  else if (display.value == undefined){
+    console.log(e.target.innerHTML)
+    display.textContent = e.key
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  
+  }
+  else if (display.value &&  !(display.textContent.includes('.'))) {
+    display.textContent = display.textContent +  e.key
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  }
+}
+
+function bSpace(e){
+  if (operatorSelected == false){
+    display.textContent = display.textContent.substring(0, display.textContent.length-1)
+    display.value = parseFloat(display.textContent)
+    n1 = display.value
+    console.log(display.textContent.length)
+    console.log("n1: "+n1)
+  }
+
+  else if (display.value == undefined){
+    display.textContent = display.textContent.substring(0, display.textContent.length-1)
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  
+  }
+  else {
+    console.log("display value" + display.value)
+    display.textContent = display.textContent.substring(0, display.textContent.length-1)
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
