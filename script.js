@@ -5,6 +5,7 @@ const equals = document.getElementById('equal')
 const sign = document.getElementById('sign')
 const clear = document.getElementById('clear')
 const decimal = document.getElementById('decimal')
+const backspace = document.getElementById('backspace')
 
 let opType = ''
 let n1 = NaN
@@ -20,7 +21,6 @@ num.forEach(num => num.addEventListener('click', numSelect))
 operations.forEach(operations => operations.addEventListener('click', opSelect))
 
 equals.addEventListener('click', operate)
-equals.addEventListener('keydown', equalsKB)
 
 sign.addEventListener('click', changeSign)
 
@@ -28,23 +28,29 @@ clear.addEventListener('click', reset)
 
 decimal.addEventListener('click', decimalSelect)
 
+backspace.addEventListener('click', bSpace)
+
 
 
 window.addEventListener('keydown', numSelectKB)
 
+
+function bSpace(e)
 
 function equalsKB(e){
   console.log(e.keyCode)
 }
 
 function numSelectKB(e){
-  console.log(e)
-  console.log('1234567890.'.includes(e.key))
+  console.log(e.key)
     if (e.key == 'Enter'){
       operate()
     }
-    if (display.textContent.length>15 || !('1234567890.'.includes(e.key))) {
-        
+    else if (e.key == 'Backspace'){
+      console.log('for later')
+    }
+    else if (display.textContent.length>15 || !('1234567890.'.includes(e.key))) {
+        console.log('invalid key')
     }
     else if (e.key == '.'){
       decimalSelectKB(e)
@@ -223,7 +229,4 @@ function decimalSelect(e){
 
 /* TODO: 
 add back button
-add kb support
-add another display to store previous value
-make it look better
 */
