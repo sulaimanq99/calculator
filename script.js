@@ -13,6 +13,8 @@ let operatorSelected = false
 let decimalSelected = false
 
 
+
+
 num.forEach(num => num.addEventListener('click', numSelect))
 
 operations.forEach(operations => operations.addEventListener('click', opSelect))
@@ -25,37 +27,16 @@ clear.addEventListener('click', reset)
 
 decimal.addEventListener('click', decimalSelect)
 
-function decimalSelect(e){
-  if (operatorSelected == false && !(display.textContent.includes('.'))){
-    display.textContent = display.textContent +  e.target.innerHTML
-    display.value = parseFloat(display.textContent)
-    n1 = display.value
-    console.log("n1: "+n1)
-  }
-
-  else if (display.value == undefined){
-    console.log(e.target.innerHTML)
-    display.textContent = e.target.innerHTML
-    display.value = parseFloat(display.textContent)
-    n2 = display.value
-    console.log("n2: "+n2)
-  
-  }
-  else if (display.value &&  !(display.textContent.includes('.'))) {
-    display.textContent = display.textContent +  e.target.innerHTML
-    display.value = parseFloat(display.textContent)
-    n2 = display.value
-    console.log("n2: "+n2)
-  }
-
-}
-
 
 function numSelect (e) {
-    if (operatorSelected == false){
+    if (display.textContent.length>15){
+
+    }
+    else if (operatorSelected == false){
       display.textContent = display.textContent +  e.target.innerHTML
       display.value = parseFloat(display.textContent)
       n1 = display.value
+      console.log(display.textContent.length)
       console.log("n1: "+n1)
     }
 
@@ -74,15 +55,24 @@ function numSelect (e) {
       n2 = display.value
       console.log("n2: "+n2)
     }
-  }
+}
 
 function opSelect(e){
-  operatorSelected = true
-  console.log(e.target.id)
-  display.value = undefined
-  console.log(display.value)
-  opType = e.target.id
- 
+  if (operatorSelected == false){
+    operatorSelected = true
+    console.log(e.target.id)
+    display.value = undefined
+    opType = e.target.id
+    }
+
+  else {
+    console.log('operate selected')
+    console.log(e.target.id)
+    display.value = undefined
+    operate()
+    operatorSelected = true
+    opType = e.target.id
+  }
 }
 
 function operate() {
@@ -117,7 +107,7 @@ function changeSign(e){
 function updateResult(result) {
   console.log('result ' + result)
   n1 = result
-  n2 = NaN
+  n2 = undefined
   display.textContent = result
 }
 
@@ -130,15 +120,36 @@ function reset(){
   display.textContent = ''
 }
 
+function decimalSelect(e){
+  if (operatorSelected == false && !(display.textContent.includes('.'))){
+    display.textContent = display.textContent +  e.target.innerHTML
+    display.value = parseFloat(display.textContent)
+    n1 = display.value
+    console.log("n1: "+n1)
+  }
+
+  else if (display.value == undefined){
+    console.log(e.target.innerHTML)
+    display.textContent = e.target.innerHTML
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  
+  }
+  else if (display.value &&  !(display.textContent.includes('.'))) {
+    display.textContent = display.textContent +  e.target.innerHTML
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  }
+
+}
 
 
 /* TODO: 
-finish decimal button implementation
-finish adding implicit equals to operation signs
-add another display to store previous value
 add limit on no of decimal places and digits
-add message for dividing by 0
 add back button
 add kb support
+add another display to store previous value
 make it look better
 */
