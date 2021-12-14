@@ -12,6 +12,7 @@ let n1 = NaN
 let n2 = NaN
 let operatorSelected = false
 let decimalSelected = false
+display.textContent = ''
 
 
 
@@ -45,7 +46,6 @@ function bSpace(e){
   }
 
   else if (display.value == undefined){
-    console.log(e.target.innerHTML)
     display.textContent = display.textContent.substring(0, display.textContent.length-1)
     display.value = parseFloat(display.textContent)
     n2 = display.value
@@ -72,9 +72,9 @@ function numSelectKB(e){
       operate()
     }
     else if (e.key == 'Backspace'){
-      console.log('for later')
+      bSpace()
     }
-    else if (display.textContent.length>15 || !('1234567890.'.includes(e.key))) {
+    else if (display.textContent.length>11 || !('1234567890.'.includes(e.key))) {
         console.log('invalid key')
     }
     else if (e.key == '.'){
@@ -110,7 +110,7 @@ function numSelect(e) {
   console.log(e)
   console.log(e.target.innerHTML)
   console.log("id "+e.target.id)
-    if (display.textContent.length>15){
+    if (display.textContent.length>11){
 
     }
     else if (operatorSelected == false){
