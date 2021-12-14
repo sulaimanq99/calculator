@@ -35,7 +35,32 @@ backspace.addEventListener('click', bSpace)
 window.addEventListener('keydown', numSelectKB)
 
 
-function bSpace(e)
+function bSpace(e){
+  if (operatorSelected == false){
+    display.textContent = display.textContent.substring(0, display.textContent.length-1)
+    display.value = parseFloat(display.textContent)
+    n1 = display.value
+    console.log(display.textContent.length)
+    console.log("n1: "+n1)
+  }
+
+  else if (display.value == undefined){
+    console.log(e.target.innerHTML)
+    display.textContent = display.textContent.substring(0, display.textContent.length-1)
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  
+  }
+  else {
+    console.log("display value" + display.value)
+    display.textContent = display.textContent.substring(0, display.textContent.length-1)
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  }
+  
+}
 
 function equalsKB(e){
   console.log(e.keyCode)
@@ -121,14 +146,14 @@ function opSelect(e){
     opType = e.target.id
     }
 
-  else {
+ /* else {
     console.log('operate selected')
     console.log(e.target.id)
     display.value = undefined
     operate()
     operatorSelected = true
     opType = e.target.id
-  }
+  }*/
 }
 
 function operate() {
@@ -156,7 +181,7 @@ function operate() {
 function changeSign(e){
   n1 = parseFloat(display.textContent)*-1
   result = n1
-  n2 = NaN
+  n2 = undefined
   display.textContent = result
 }
 
