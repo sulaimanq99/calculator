@@ -20,6 +20,7 @@ num.forEach(num => num.addEventListener('click', numSelect))
 operations.forEach(operations => operations.addEventListener('click', opSelect))
 
 equals.addEventListener('click', operate)
+equals.addEventListener('keydown', equalsKB)
 
 sign.addEventListener('click', changeSign)
 
@@ -28,7 +29,56 @@ clear.addEventListener('click', reset)
 decimal.addEventListener('click', decimalSelect)
 
 
-function numSelect (e) {
+
+window.addEventListener('keydown', numSelectKB)
+
+
+function equalsKB(e){
+  console.log(e.keyCode)
+}
+
+function numSelectKB(e){
+  console.log(e)
+  console.log('1234567890.'.includes(e.key))
+    if (e.key == 'Enter'){
+      operate()
+    }
+    if (display.textContent.length>15 || !('1234567890.'.includes(e.key))) {
+        
+    }
+    else if (e.key == '.'){
+      decimalSelectKB(e)
+    }
+    else if (operatorSelected == false){
+      display.textContent = display.textContent +  e.key
+      display.value = parseFloat(display.textContent)
+      n1 = display.value
+      console.log(display.textContent.length)
+      console.log("n1: "+n1)
+    }
+
+    else if (display.value == undefined){
+      console.log(e.key)
+      display.textContent = e.key
+      display.value = parseFloat(display.textContent)
+      n2 = display.value
+      console.log("n2: "+n2)
+    
+    }
+    else {
+      console.log("display value" + display.value)
+      display.textContent = display.textContent +  e.key
+      display.value = parseFloat(display.textContent)
+      n2 = display.value
+      console.log("n2: "+n2)
+    }
+}
+
+
+function numSelect(e) {
+  console.log(e)
+  console.log(e.target.innerHTML)
+  console.log("id "+e.target.id)
     if (display.textContent.length>15){
 
     }
@@ -120,9 +170,34 @@ function reset(){
   display.textContent = ''
 }
 
+function decimalSelectKB(e){
+  console.log('dbkb run')
+  if (operatorSelected == false && !(display.textContent.includes('.'))){
+    display.textContent = display.textContent +  e.key
+    display.value = parseFloat(display.textContent)
+    n1 = display.value
+    console.log("n1: "+n1)
+  }
+
+  else if (display.value == undefined){
+    console.log(e.target.innerHTML)
+    display.textContent = e.key
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  
+  }
+  else if (display.value &&  !(display.textContent.includes('.'))) {
+    display.textContent = display.textContent +  e.key
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  }
+}
+
 function decimalSelect(e){
   if (operatorSelected == false && !(display.textContent.includes('.'))){
-    display.textContent = display.textContent +  e.target.innerHTML
+    display.textContent = display.textContent +  e.key
     display.value = parseFloat(display.textContent)
     n1 = display.value
     console.log("n1: "+n1)
@@ -147,7 +222,6 @@ function decimalSelect(e){
 
 
 /* TODO: 
-add limit on no of decimal places and digits
 add back button
 add kb support
 add another display to store previous value
