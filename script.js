@@ -4,11 +4,13 @@ const operations = Array.from(document.getElementsByClassName('operation'))
 const equals = document.getElementById('equal')
 const sign = document.getElementById('sign')
 const clear = document.getElementById('clear')
+const decimal = document.getElementById('decimal')
 
 let opType = ''
 let n1 = NaN
 let n2 = NaN
 let operatorSelected = false
+let decimalSelected = false
 
 
 num.forEach(num => num.addEventListener('click', numSelect))
@@ -20,6 +22,33 @@ equals.addEventListener('click', operate)
 sign.addEventListener('click', changeSign)
 
 clear.addEventListener('click', reset)
+
+decimal.addEventListener('click', decimalSelect)
+
+function decimalSelect(e){
+  if (operatorSelected == false && !(display.textContent.includes('.'))){
+    display.textContent = display.textContent +  e.target.innerHTML
+    display.value = parseFloat(display.textContent)
+    n1 = display.value
+    console.log("n1: "+n1)
+  }
+
+  else if (display.value == undefined){
+    console.log(e.target.innerHTML)
+    display.textContent = e.target.innerHTML
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  
+  }
+  else if (display.value &&  !(display.textContent.includes('.'))) {
+    display.textContent = display.textContent +  e.target.innerHTML
+    display.value = parseFloat(display.textContent)
+    n2 = display.value
+    console.log("n2: "+n2)
+  }
+
+}
 
 
 function numSelect (e) {
@@ -86,7 +115,7 @@ function changeSign(e){
 }
 
 function updateResult(result) {
-  console.log('result')
+  console.log('result ' + result)
   n1 = result
   n2 = NaN
   display.textContent = result
@@ -96,10 +125,10 @@ function reset(){
   n1 = NaN
   n2 = NaN
   operatorSelected = false
+  decimalSelected = false
   display.value = undefined
   display.textContent = ''
 }
-
 
 
 
