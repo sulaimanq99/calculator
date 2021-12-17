@@ -130,7 +130,7 @@ function operate() {
   operatorSelected = false
   let result = ''
   if (opType == 'divide'){
-    result = n1/n2
+    result = (n1/n2).toFixed(3)
   }
   else if (opType == 'times'){
     result = n1*n2
